@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.netease.yuedu.snail.biz.dao.snail.ReadTimeTradeMapper">
+
+    <resultMap id="readTimeTrade" type="com.netease.yuedu.snail.biz.model.entity.ReadTimeTrade">
+        <id column="TradeId" property="tradeId" jdbcType="BIGINT"/>
+        <result column="TradeNo" property="tradeNo" jdbcType="VARCHAR"/>
+        <result column="UserId" property="userId" jdbcType="BIGINT"/>
+        <result column="Days" property="days" jdbcType="INTEGER"/>
+        <result column="Money" property="money" jdbcType="INTEGER"/>
+        <result column="TradeStatus" property="tradeStatus" jdbcType="INTEGER"/>
+        <result column="PayMethod" property="payMethod" jdbcType="VARCHAR"/>
+        <result column="Platform" property="platform" jdbcType="VARCHAR"/>
+        <result column="DeviceId" property="deviceId" jdbcType="VARCHAR"/>
+        <result column="Ip" property="ip" jdbcType="VARCHAR"/>
+        <result column="PayTime" property="payTime" jdbcType="BIGINT"/>
+        <result column="CreateTime" property="createTime" jdbcType="BIGINT"/>
+        <result column="UpdateTime" property="updateTime" jdbcType="BIGINT"/>
+        <result column="Status" property="status" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="queryReadTimeRecords" resultMap="readTimeTrade" parameterType="com.netease.yuedu.snail.biz.model.queryObject.ReadTimeTradeQueryObject">
+        SELECT * FROM ReadTimeTrade
+        <where>
+            <if test="tradeStatus != null">
+                TradeStatus = #{tradeStatus}
+            </if>
+            <if test="startTime != null">
+                <![CDATA[
+             AND CreateTime >= #{startTime}
+                ]]>
+
+            </if>
+            <if test="endTime != null">
+                <![CDATA[
+                AND CreateTime<= #{endTime}
+                ]]>
+            </if>
+        </where>
+    </select>
+
+</mapper>

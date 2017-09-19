@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    snail-master:
+      url: jdbc:mysql://10.164.97.50:6000/library-test?useUnicode=yes&characterEncoding=utf-8
+      username: lib-test
+      password: lib-test
+      driver-class-name: com.mysql.jdbc.Driver
+    snail-slave:
+      url: jdbc:mysql://10.164.97.50:6000/library-test?useUnicode=yes&characterEncoding=utf-8
+      username: lib-test
+      password: lib-test
+      driver-class-name: com.mysql.jdbc.Driver
+    yuedu-slave:
+      url: jdbc:mysql://10.165.124.116:6000/yuedu-test?useUnicode=yes&characterEncoding=utf-8
+      username: pris_test_18888
+      password: pris_test_18888
+      driver-class-name: com.mysql.jdbc.Driver
+  session:
+    store-type: none
+
+  redis:
+    host: 192.168.200.128
+    port: 6379
+    password: lewis
+
+  thymeleaf:
+    encoding: utf-8
+    cache: false
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+
+server:
+  port: 8060
+  context-path: /snail-charge-backend
+
+
+security:
+  basic:
+    enabled: false
+
+mybatis:
+  typeAliasesPackage: com.lewis.springbootvue.biz.mybatis.entity
+  mapperLocations: classpath:mapper/*
+
+logging:
+  level:
+    org.springframework: warn
+    com.netease.yuedu.snail.biz.dao.snail.ReadTimeTradeMapper: debug
+  file: logs/spring-boot-log.log
+
+

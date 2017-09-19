@@ -1,0 +1,47 @@
+spring:
+  datasource:
+    master:
+      url: jdbc:mysql://10.164.141.137:6000/library-online?useUnicode=true&characterEncoding=utf8
+      username: lib-backend
+      password: lib-backend
+      driver-class-name: com.mysql.jdbc.Driver
+    cluster:
+      url: jdbc:mysql://10.164.141.137:6000/library-online?useUnicode=true&characterEncoding=utf8
+      username: lib-backend
+      password: lib-backend
+      driver-class-name: com.mysql.jdbc.Driver
+    cluster1:
+      url: jdbc:mysql://10.164.141.141:6000/yuedu-mirror
+      username: snail_read
+      password: snail_read
+      driver-class-name: com.mysql.jdbc.Driver
+  session:
+    store-type: none
+
+  redis:
+    host: 192.168.200.128
+    port: 6379
+    password: lewis
+
+  thymeleaf:
+    encoding: utf-8
+    cache: false
+    mode: HTML
+    prefix: classpath:/templates/
+    suffix: .html
+
+server:
+  port: 8060
+  context-path: /snail-charge-backend
+
+
+security:
+  basic:
+    enabled: false
+
+mybatis:
+  typeAliasesPackage: com.netease.yuedu.snail.biz.model.entity.ReadTimeTrade
+  mapperLocations: classpath:mapper/*
+
+
+
