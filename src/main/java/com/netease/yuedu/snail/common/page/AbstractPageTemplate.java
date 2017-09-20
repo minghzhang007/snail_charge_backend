@@ -14,5 +14,6 @@ public abstract class AbstractPageTemplate<T> {
         return pageList;
     }
 
+
     protected abstract List<T> queryItems();
 }

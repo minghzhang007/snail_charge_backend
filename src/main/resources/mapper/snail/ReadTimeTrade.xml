@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.netease.yuedu.snail.biz.dao.snail.ReadTimeTradeMapper">
 
-    <resultMap id="readTimeTrade" type="com.netease.yuedu.snail.biz.model.entity.ReadTimeTrade">
-        <id column="TradeId" property="tradeId" jdbcType="BIGINT"/>
+    <resultMap id="readTimeTradeVO" type="com.netease.yuedu.snail.biz.model.vo.ReadTimeTradeVO">
+        <result column="TradeId" property="tradeId" jdbcType="BIGINT"/>
         <result column="TradeNo" property="tradeNo" jdbcType="VARCHAR"/>
         <result column="UserId" property="userId" jdbcType="BIGINT"/>
         <result column="Days" property="days" jdbcType="INTEGER"/>
@@ -17,26 +17,36 @@
         <result column="CreateTime" property="createTime" jdbcType="BIGINT"/>
         <result column="UpdateTime" property="updateTime" jdbcType="BIGINT"/>
         <result column="Status" property="status" jdbcType="INTEGER"/>
+        <result column="UserName" property="userName" jdbcType="VARCHAR"/>
+        <result column="NickName" property="nickName" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="queryReadTimeRecords" resultMap="readTimeTrade" parameterType="com.netease.yuedu.snail.biz.model.queryObject.ReadTimeTradeQueryObject">
-        SELECT * FROM ReadTimeTrade
+    <select id="queryReadTimeRecords" resultMap="readTimeTradeVO"
+            parameterType="com.netease.yuedu.snail.biz.model.queryObject.ReadTimeTradeQueryObject">
+        SELECT * FROM ReadTimeTrade t , User u
         <where>
+            t.UserId=u.UserId
             <if test="tradeStatus != null">
-                TradeStatus = #{tradeStatus}
+                AND t.TradeStatus = #{tradeStatus}
             </if>
             <if test="startTime != null">
                 <![CDATA[
-             AND CreateTime >= #{startTime}
+             AND t.CreateTime >= #{startTime}
                 ]]>
-
             </if>
             <if test="endTime != null">
                 <![CDATA[
-                AND CreateTime<= #{endTime}
+                AND t.CreateTime<= #{endTime}
                 ]]>
             </if>
+            <if test="userId != null">
+                AND t.UserId =#{userId}
+            </if>
+            <if test="userName != null and userName !=''">
+                AND u.UserName = #{userName}
+            </if>
         </where>
+        ORDER by t.CreateTime DESC
     </select>
 
 </mapper>

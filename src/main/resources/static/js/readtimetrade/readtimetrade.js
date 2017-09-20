@@ -32,17 +32,26 @@ VM = new Vue({
                 "pageSize": _this.pageSize,
                 "totalCount": _this.result.paginator.totalCount
             };
+            var userName = '' != $("#userName").val() ? $("#userName").val() : null;
             var formData = {
                 "tradeStatus": $("#tradeStatus").val(),
                 "startTime": '' != $("#startTime").val() ? moment($("#startTime").val()).format('X') * 1000 : null,
-                "endTime": '' != $("#endTime").val() ? moment($("#endTime").val()).format('X') * 1000 : null
-            }
-            var data2 = $.extend(formData, pageInfo);
+                "endTime": '' != $("#endTime").val() ? moment($("#endTime").val()).format('X') * 1000 : null,
+                "userId": $("#userId").val(),
+                "userName": userName,
+                "currentPage": _this.result.paginator.currentPage,
+                "pageSize": _this.pageSize,
+                "totalCount": _this.result.paginator.totalCount
+            };
+
+            var data2 = $.extend({}, formData, pageInfo);
+            var stringify = JSON.stringify(formData);
+            console.log(stringify);
             $.ajax({
                 url: url + "query",
                 type: "GET",
                 dataType: "JSON",
-                data: data2,
+                data: stringify,
                 success: function (data) {
                     _this.result = data;
                 }

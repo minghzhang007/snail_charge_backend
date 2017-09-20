@@ -3,6 +3,7 @@ package com.netease.yuedu.snail.biz.service.readtimetrade.impl;
 import com.netease.yuedu.snail.biz.dao.snail.ReadTimeTradeMapper;
 import com.netease.yuedu.snail.biz.model.entity.ReadTimeTrade;
 import com.netease.yuedu.snail.biz.model.queryObject.ReadTimeTradeQueryObject;
+import com.netease.yuedu.snail.biz.model.vo.ReadTimeTradeVO;
 import com.netease.yuedu.snail.biz.service.readtimetrade.ReadTimeTradeService;
 import com.netease.yuedu.snail.common.page.AbstractPageTemplate;
 import com.netease.yuedu.snail.common.page.PageList;
@@ -20,14 +21,14 @@ public class ReadTimeTradeImpl implements ReadTimeTradeService {
 
 
     @Override
-    public PageList<ReadTimeTrade> queryByPage(final ReadTimeTradeQueryObject queryObject, Paginator paginator) {
+    public PageList<ReadTimeTradeVO> queryByPage(final ReadTimeTradeQueryObject queryObject) {
 
-        PageList<ReadTimeTrade> itemsByPage = new AbstractPageTemplate<ReadTimeTrade>() {
+        PageList<ReadTimeTradeVO> itemsByPage = new AbstractPageTemplate<ReadTimeTradeVO>() {
             @Override
-            protected List<ReadTimeTrade> queryItems() {
+            protected List<ReadTimeTradeVO> queryItems() {
                 return tradeMapper.queryReadTimeRecords(queryObject);
             }
-        }.getItemsByPage(paginator);
+        }.getItemsByPage(queryObject);
         return itemsByPage;
     }
 }

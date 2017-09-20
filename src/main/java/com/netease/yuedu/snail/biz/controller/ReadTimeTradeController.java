@@ -1,8 +1,9 @@
 package com.netease.yuedu.snail.biz.controller;
 
-import com.netease.yuedu.snail.biz.model.entity.ReadTimeTrade;
 import com.netease.yuedu.snail.biz.model.queryObject.ReadTimeTradeQueryObject;
+import com.netease.yuedu.snail.biz.model.vo.ReadTimeTradeVO;
 import com.netease.yuedu.snail.biz.service.readtimetrade.ReadTimeTradeService;
+import com.netease.yuedu.snail.common.core.Json;
 import com.netease.yuedu.snail.common.page.PageList;
 import com.netease.yuedu.snail.common.page.Paginator;
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,9 @@ public class ReadTimeTradeController {
 
     @GetMapping("/query")
     @ResponseBody
-    public PageList<ReadTimeTrade> queryReadTimeTrades(ReadTimeTradeQueryObject queryObject, Paginator paginator) {
+    public PageList<ReadTimeTradeVO> queryReadTimeTrades(@Json ReadTimeTradeQueryObject queryObject) {
 
-        PageList<ReadTimeTrade> pageList = readTimeTradeService.queryByPage(queryObject, paginator);
+        PageList<ReadTimeTradeVO> pageList = readTimeTradeService.queryByPage(queryObject);
         return pageList;
     }
 
