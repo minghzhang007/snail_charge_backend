@@ -1,6 +1,8 @@
 package com.netease.yuedu.snail.common.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.Feature;
+import com.netease.yuedu.snail.biz.model.entity.ReadTimeTrade;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,6 +44,12 @@ public  class JsonUtil {
             }
         }
         return retList;
+    }
+
+    public static void main(String[] args) {
+        String str="{\"tradeStatus\":\"\",\"startTime\":null,\"endTime\":null,\"userId\":\"\",\"userName\":\"\",\"currentPage\":0,\"pageSize\":10,\"totalCount\":0}";
+        ReadTimeTrade readTimeTrade = JSON.parseObject(str, ReadTimeTrade.class, Feature.IgnoreNotMatch);
+        System.out.println(readTimeTrade);
     }
 
 }

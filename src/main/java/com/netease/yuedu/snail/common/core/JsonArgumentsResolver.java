@@ -1,5 +1,7 @@
 package com.netease.yuedu.snail.common.core;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.parser.Feature;
 import com.netease.yuedu.snail.common.utils.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
@@ -26,7 +28,8 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
         Class<?> parameterType = methodParameter.getParameterType();
         String requestParam = getAllRequestParams(nativeWebRequest);
         if (parameterType != null && StringUtils.isNotEmpty(requestParam)) {
-            Object o = JsonUtil.toBean(requestParam, parameterType);
+           // Object o = JsonUtil.toBean(requestParam, parameterType);
+            Object o = JSON.parseObject(requestParam,parameterType, Feature.IgnoreNotMatch);
             return o;
         }
         return null;

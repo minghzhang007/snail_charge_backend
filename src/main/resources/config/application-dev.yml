@@ -46,7 +46,7 @@ mybatis:
 logging:
   level:
     org.springframework: warn
-    com.netease.yuedu.snail.biz.dao.snail.ReadTimeTradeMapper: debug
+    com.netease.yuedu.snail.biz.dao: debug
   file: logs/spring-boot-log.log
 
 

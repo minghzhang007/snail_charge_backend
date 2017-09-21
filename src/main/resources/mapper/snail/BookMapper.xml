@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.netease.yuedu.snail.biz.dao.snail.BookMapper">
+
+    <resultMap id="bookMap" type="com.netease.yuedu.snail.biz.model.entity.Book">
+        <result column="BookId" property="bookId"/>
+        <result column="Uuid" property="uuid"/>
+        <result column="Title" property="title"/>
+        <result column="SeoTitle" property="seoTitle"/>
+        <result column="Description" property="description"/>
+        <result column="ImageUrl" property="imageUrl"/>
+        <result column="CreateTime" property="createTime"/>
+        <result column="UpdateTime" property="updateTime"/>
+        <result column="Status" property="status"/>
+        <result column="AuthorIds" property="authorIds"/>
+        <result column="AuthorAlias" property="authorAlias"/>
+        <result column="CategoryId" property="categoryId"/>
+        <result column="CatalogKey" property="catalogKey"/>
+        <result column="WordCount" property="wordCount"/>
+        <result column="ISBN" property="ISBN"/>
+        <result column="ProviderId" property="providerId"/>
+        <result column="PublishTime" property="publishTime"/>
+        <result column="Publisher" property="publisher"/>
+        <result column="CompleteStatus" property="completeStatus"/>
+        <result column="BookType" property="bookType"/>
+        <result column="Lang" property="lang"/>
+        <result column="Pages" property="pages"/>
+        <result column="Pack" property="pack"/>
+        <result column="Texture" property="texture"/>
+        <result column="Format" property="format"/>
+        <result column="Keyname" property="keyName"/>
+        <result column="BuyUrl" property="buyUrl"/>
+        <result column="ViewCount" property="viewCount"/>
+        <result column="DefaultQuestionId" property="defaultQuestionId"/>
+        <result column="CostCoins" property="costCoins"/>
+        <result column="RecUploadTime" property="recUploadTime"/>
+    </resultMap>
+    
+    <sql id="bookSimpleColumns">
+        BookId,Uuid,Title,Status,AuthorIds,AuthorAlias,ProviderId
+    </sql>
+
+    <select id="queryBooksMap" resultMap="bookMap"
+            parameterType="com.netease.yuedu.snail.biz.model.queryObject.BookQueryObject">
+        SELECT 
+        <include refid="bookSimpleColumns"/>
+        FROM Book
+        <where>
+            <if test="uuid != null">
+                AND Uuid =#{uuid}
+            </if>
+            <if test="title != null">
+                AND Title = #{title}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryBooks" resultMap="bookMap"
+            parameterType="com.netease.yuedu.snail.biz.model.queryObject.BookQueryObject">
+        SELECT
+        <include refid="bookSimpleColumns"/>
+        FROM Book
+        <where>
+            <if test="uuid != null">
+                AND Uuid =#{uuid}
+            </if>
+            <if test="title != null">
+                AND Title = #{title}
+            </if>
+        </where>
+    </select>
+
+</mapper>

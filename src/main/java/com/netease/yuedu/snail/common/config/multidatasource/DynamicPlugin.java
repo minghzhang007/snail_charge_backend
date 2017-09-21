@@ -40,7 +40,7 @@ public class DynamicPlugin implements Interceptor {
             MappedStatement ms = (MappedStatement) objects[0];
             DynamicDataSourceGlobal dynamicDataSourceGlobal = null;
             String id = ms.getId();
-            if (id.startsWith("com.lewis.sprinbootvue.biz.mybatis.dao.snailReader")) {
+            if (id.startsWith("com.netease.yuedu.snail.biz.dao.yuedu")) {
                 dynamicDataSourceGlobal = DynamicDataSourceGlobal.OTHER;
             } else {
                 if ((dynamicDataSourceGlobal = cacheMap.get(ms.getId())) == null) {

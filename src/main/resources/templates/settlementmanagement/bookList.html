@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>按书籍查看</title>
+    <style type="text/css">
+        .table > thead > tr > th {
+            text-align: center;
+        }
+    </style>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../../css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" href="../../css/style.css" th:href="@{/css/style.css}"/>
+    <link rel="stylesheet" href="../../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}"/>
+</head>
+<body>
+<div>
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div th:insert="/component/nav :: copy"></div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <button type="button" class="hamburger is-closed animated fadeInLeft" data-toggle="offcanvas">
+                <span class="hamb-top"></span>
+                <span class="hamb-middle"></span>
+                <span class="hamb-bottom"></span>
+            </button>
+            <div class="container">
+                <ol class="breadcrumb">
+                    <li><a href="#">结算管理</a></li>
+                    <li class="active">按书籍查看</li>
+                </ol>
+
+                <div id="app">
+                    <div>
+                        <form class="form-horizontal form-" role="form" id="searchForm">
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="uuid" class="col-md-1 control-label">UUID</label>
+                                    <div class="col-md-2">
+                                        <input type="text" id="uuid" placeholder="请输入书籍UUID" class="form-control">
+                                    </div>
+
+                                    <label for="title" class="col-md-1 control-label">书名</label>
+                                    <div class="col-md-2">
+                                        <input type="text" id="title" placeholder="请输入书名" class="form-control">
+                                    </div>
+
+                                    <button type="button" class="btn btn-default col-md-offset-1" @click="query">搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>UUID</th>
+                                <th>书名</th>
+                                <th>作者</th>
+                                <th>状态</th>
+                                <th>CP方ID</th>
+                                <th>CP名称(别名)</th>
+                                <th>责编</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr v-for="book in result.data">
+                                <td>{{book.uuid}}</td>
+                                <td>{{book.title}}</td>
+                                <td>{{book.authorNames}}</td>
+                                <td>{{book.status}}</td>
+                                <td>{{book.providerId}}</td>
+                                <td>{{book.providerName}}</td>
+                                <td>{{book.providerName}}</td>
+                                <td><button type="button" class="btn btn-default">收益详情</button>
+                                    <button type="button" class="btn btn-default">导出表格</button></td>
+                            </tr>
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <td colspan="100">
+                                    <vue-page :paginator="result.paginator" :size="10" :query="query"></vue-page>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div th:insert="/component/foot :: copy"></div>
+            </div>
+
+        </div>
+        <!-- /#page-content-wrapper -->
+    </div>
+</div>
+<script src="../../js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}"></script>
+<script src="../../js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
+<script src="../../js/vue.js" th:src="@{/js/vue.js}"></script>
+<script src="../../js/vue.page.js" th:src="@{/js/vue.page.js}"></script>
+<script src="../../js/bootstrap-datetimepicker.js" th:src="@{/js/jquery-ui.js}"></script>
+<script src="../../js/user/userList.js" th:src="@{/js/vue.filter.js}"></script>
+<script src="../../js/user/userList.js" th:src="@{/js/nav.js}"></script>
+<script src="../../js/user/userList.js" th:src="@{/js/settlementmanagement/bookList.js}"></script>
+
+</body>
+</html>

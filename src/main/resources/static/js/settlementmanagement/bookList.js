@@ -28,18 +28,15 @@ VM = new Vue({
             var url = window.location.protocol + "//" + window.location.host + $("#contextPath").text();
 
             var formData = {
-                "tradeStatus": $("#tradeStatus").val(),
-                "startTime": '' != $("#startTime").val() ? moment($("#startTime").val()).format('X') * 1000 : null,
-                "endTime": '' != $("#endTime").val() ? moment($("#endTime").val()).format('X') * 1000 : null,
-                "userId": $("#userId").val(),
-                "userName": $("#userName").val(),
+                "uuid": $("#uuid").val(),
+                "title": $("#title").val(),
                 "currentPage": _this.result.paginator.currentPage,
                 "pageSize": _this.pageSize,
                 "totalCount": _this.result.paginator.totalCount
             };
 
             $.ajax({
-                url: url + "trade/query",
+                url: url + "book/query",
                 type: "GET",
                 dataType: "JSON",
                 data: JSON.stringify(formData),
@@ -52,16 +49,13 @@ VM = new Vue({
         exportToExcel: function () {
             var url = window.location.protocol + "//" + window.location.host + $("#contextPath").text();
             var formData = {
-                "tradeStatus": $("#tradeStatus").val(),
-                "startTime": '' != $("#startTime").val() ? moment($("#startTime").val()).format('X') * 1000 : null,
-                "endTime": '' != $("#endTime").val() ? moment($("#endTime").val()).format('X') * 1000 : null,
-                "userId": $("#userId").val(),
-                "userName": $("#userName").val(),
-                "currentPage": this.result.paginator.currentPage,
-                "pageSize": this.pageSize,
-                "totalCount": this.result.paginator.totalCount
+                "uuid": $("#uuid").val(),
+                "title": $("#title").val(),
+                "currentPage": _this.result.paginator.currentPage,
+                "pageSize": _this.pageSize,
+                "totalCount": _this.result.paginator.totalCount
             };
-            window.location.href = url+"trade/export?"+JSON.stringify(formData);
+            window.location.href = url + "book/export?" + JSON.stringify(formData);
         }
     }
 });

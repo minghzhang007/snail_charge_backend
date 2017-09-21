@@ -1,16 +1,14 @@
-package com.netease.yuedu.snail.biz.service.readtimetrade.impl;
+package com.netease.yuedu.snail.biz.service.trademanagement.impl;
 
 import com.google.common.collect.Lists;
 import com.netease.yuedu.snail.biz.dao.snail.ReadTimeTradeMapper;
 import com.netease.yuedu.snail.biz.model.constants.TradeStatusEnum;
-import com.netease.yuedu.snail.biz.model.entity.ReadTimeTrade;
 import com.netease.yuedu.snail.biz.model.queryObject.ReadTimeTradeQueryObject;
 import com.netease.yuedu.snail.biz.model.vo.ReadTimeTradeVO;
-import com.netease.yuedu.snail.biz.service.readtimetrade.ReadTimeTradeService;
+import com.netease.yuedu.snail.biz.service.trademanagement.ReadTimeTradeService;
 import com.netease.yuedu.snail.common.excel.AbstractExportExcelTemplate;
 import com.netease.yuedu.snail.common.page.AbstractPageTemplate;
 import com.netease.yuedu.snail.common.page.PageList;
-import com.netease.yuedu.snail.common.page.Paginator;
 import com.netease.yuedu.snail.common.utils.DateUtil;
 import com.netease.yuedu.snail.common.utils.TimeTokenUtil;
 import org.apache.commons.collections.CollectionUtils;
@@ -20,7 +18,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class ReadTimeTradeImpl implements ReadTimeTradeService {

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation" th:fragment="copy">
+    <ul class="nav sidebar-nav">
+        <li class="sidebar-brand">
+            <a href="#">
+                蜗牛读书
+            </a>
+        </li>
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw"></i>交易管理
+                <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="http://localhost:8060/snail-charge-backend/trade/toQuery">购买记录</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw"></i>结算管理
+                <span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">对账</a></li>
+                <li><a href="#">按CP查看</a></li>
+                <li><a href="http://localhost:8060/snail-charge-backend/book/toQuery">按书籍查看</a></li>
+                <li><a href="#">按支付渠道查看</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"><i class="fa fa-fw fa-home"></i>权限管理</a>
+        </li>
+    </ul>
+</nav>
+</body>
+</html>

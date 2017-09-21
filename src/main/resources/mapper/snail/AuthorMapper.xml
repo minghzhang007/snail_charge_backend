@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.netease.yuedu.snail.biz.dao.snail.AuthorMapper">
+
+
+    <select id="queryAuthorsByIds" resultType="com.netease.yuedu.snail.biz.model.entity.Author">
+        select * from Author
+        <where>
+            <if test="collection != null">
+                authorId in
+                <foreach collection="collection" item="authorId" open="(" close=")" separator=",">
+                    #{authorId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+</mapper>
