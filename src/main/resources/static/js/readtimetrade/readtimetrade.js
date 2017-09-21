@@ -48,7 +48,7 @@ VM = new Vue({
             var stringify = JSON.stringify(formData);
             console.log(stringify);
             $.ajax({
-                url: url + "query",
+                url: url + "trade/query",
                 type: "GET",
                 dataType: "JSON",
                 data: stringify,
@@ -59,7 +59,20 @@ VM = new Vue({
         },
 
         exportToExcel: function () {
-            window.location.href = "http://localhost:8060/vue/export";
+            var contextPath = $("#contextPath").text();
+            var url = window.location.protocol + "//" + window.location.host + contextPath;
+            var userName = '' != $("#userName").val() ? $("#userName").val() : null;
+            var formData = {
+                "tradeStatus": $("#tradeStatus").val(),
+                "startTime": '' != $("#startTime").val() ? moment($("#startTime").val()).format('X') * 1000 : null,
+                "endTime": '' != $("#endTime").val() ? moment($("#endTime").val()).format('X') * 1000 : null,
+                "userId": $("#userId").val(),
+                "userName": userName,
+                "currentPage": this.result.paginator.currentPage,
+                "pageSize": this.pageSize,
+                "totalCount": this.result.paginator.totalCount
+            };
+            window.location.href = url+"trade/export?"+JSON.stringify(formData);
         }
     }
 });
