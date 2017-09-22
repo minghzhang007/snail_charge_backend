@@ -1,3 +1,4 @@
+<#include "../component/layout.ftl">
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
@@ -12,17 +13,14 @@
             text-align: center;
         }
     </style>
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="../../css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" href="../../css/style.css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" href="../../css/jquery-ui.css" th:href="@{/css/jquery-ui.css}"/>
+    <@css></@css>
 </head>
 <body>
 <div>
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <div th:insert="/component/nav :: copy"></div>
+        <#include "../component/nav.html">
         <!-- /#sidebar-wrapper -->
 
         <!-- Page Content -->
@@ -128,22 +126,15 @@
 
                 </div>
 
-                <div th:insert="/component/foot :: copy"></div>
+                <#include "../component/foot.ftl">
             </div>
 
         </div>
         <!-- /#page-content-wrapper -->
     </div>
 </div>
-<script src="../../js/jquery-3.2.1.js" th:src="@{/js/jquery-3.2.1.js}"></script>
-<script src="../../js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script>
-<script src="../../js/vue.js" th:src="@{/js/vue.js}"></script>
-<script src="../../js/vue.page.js" th:src="@{/js/vue.page.js}"></script>
-<script src="../../js/bootstrap-datetimepicker.js" th:src="@{/js/jquery-ui.js}"></script>
-<script src="../../js/user/userList.js" th:src="@{/js/moment.min.js}"></script>
-<script src="../../js/user/userList.js" th:src="@{/js/vue.filter.js}"></script>
-<script src="../../js/user/userList.js" th:src="@{/js/nav.js}"></script>
-<script src="../../js/user/userList.js" th:src="@{/js/readtimetrade/readtimetrade.js}"></script>
+<@js></@js>
+<script type="text/javascript" src="${request.contextPath}/js/readtimetrade/readtimetrade.js"></script>
 <script>
     $('#startTime').datepicker({
         changeMonth: true,

@@ -39,7 +39,7 @@ VM = new Vue({
             };
 
             $.ajax({
-                url: url + "trade/query",
+                url: url + "/trade/query",
                 type: "GET",
                 dataType: "JSON",
                 data: JSON.stringify(formData),
@@ -61,7 +61,7 @@ VM = new Vue({
                 "pageSize": this.pageSize,
                 "totalCount": this.result.paginator.totalCount
             };
-            window.location.href = url+"trade/export?"+JSON.stringify(formData);
+            window.location.href = url + "/trade/export?" + JSON.stringify(formData);
         }
     }
 });
