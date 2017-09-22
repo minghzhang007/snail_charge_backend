@@ -18,6 +18,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.transaction.PlatformTransactionManager;
+
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -90,4 +91,5 @@ public class Application {
         transactionManager.setDataSource(dynamicDataSource());
         return transactionManager;
     }
+
 }

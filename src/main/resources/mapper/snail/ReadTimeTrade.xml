@@ -42,7 +42,7 @@
             <if test="userId != null">
                 AND t.UserId =#{userId}
             </if>
-            <if test="userName != null and userName !=''">
+            <if test="userName != null">
                 AND u.UserName = #{userName}
             </if>
         </where>

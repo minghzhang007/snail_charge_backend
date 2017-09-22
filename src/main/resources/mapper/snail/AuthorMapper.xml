@@ -6,7 +6,7 @@
     <select id="queryAuthorsByIds" resultType="com.netease.yuedu.snail.biz.model.entity.Author">
         select * from Author
         <where>
-            <if test="collection != null">
+            <if test="collection != null and collection.size() > 0">
                 authorId in
                 <foreach collection="collection" item="authorId" open="(" close=")" separator=",">
                     #{authorId}

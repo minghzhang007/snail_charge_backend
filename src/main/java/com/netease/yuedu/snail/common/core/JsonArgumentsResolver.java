@@ -1,9 +1,9 @@
 package com.netease.yuedu.snail.common.core;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.parser.Feature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.netease.yuedu.snail.common.utils.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -24,12 +24,10 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
     }
 
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-        Json jsonAnno = methodParameter.getParameterAnnotation(Json.class);
         Class<?> parameterType = methodParameter.getParameterType();
         String requestParam = getAllRequestParams(nativeWebRequest);
         if (parameterType != null && StringUtils.isNotEmpty(requestParam)) {
-           // Object o = JsonUtil.toBean(requestParam, parameterType);
-            Object o = JSON.parseObject(requestParam,parameterType, Feature.IgnoreNotMatch);
+            Object o = JsonUtil.toBean(requestParam, parameterType);
             return o;
         }
         return null;
@@ -51,7 +49,7 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
             }
             requestParam = buffer.toString();
         }
-        requestParam = URLdecode(requestParam,"utf-8");
+        requestParam = URLdecode(requestParam, "utf-8");
         return requestParam;
     }
 
@@ -65,7 +63,7 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
         int i = 0;
 
         if (enc.length() == 0) {
-            throw new UnsupportedEncodingException ("URLDecoder: empty string enc parameter");
+            throw new UnsupportedEncodingException("URLDecoder: empty string enc parameter");
         }
 
         char c;
@@ -84,8 +82,8 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
                     needToChange = true;
                     break;
                 case '%':
-		/*
-		 * Starting with this instance of %, process all
+        /*
+         * Starting with this instance of %, process all
 		 * consecutive substrings of the form %xy. Each
 		 * substring %xy will yield a byte. Convert all
 		 * consecutive  bytes obtained this way to whatever
@@ -98,14 +96,14 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
                         // (numChars-i)/3 is an upper bound for the number
                         // of remaining bytes
                         if (bytes == null)
-                            bytes = new byte[(numChars-i)/3];
+                            bytes = new byte[(numChars - i) / 3];
                         int pos = 0;
 
-                        while ( ((i+2) < numChars) &&
-                                (c=='%')) {
+                        while (((i + 2) < numChars) &&
+                                (c == '%')) {
                             bytes[pos++] =
-                                    (byte)Integer.parseInt(s.substring(i+1,i+3),16);
-                            i+= 3;
+                                    (byte) Integer.parseInt(s.substring(i + 1, i + 3), 16);
+                            i += 3;
                             if (i < numChars)
                                 c = s.charAt(i);
                         }
@@ -113,7 +111,7 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
                         // A trailing, incomplete byte encoding such as
                         // "%x" will cause an exception to be thrown
 
-                        if ((i < numChars) && (c=='%'))
+                        if ((i < numChars) && (c == '%'))
                             throw new IllegalArgumentException(
                                     "URLDecoder: Incomplete trailing escape (%) pattern");
 
@@ -132,7 +130,7 @@ public class JsonArgumentsResolver implements HandlerMethodArgumentResolver {
             }
         }
 
-        return (needToChange? sb.toString() : s);
+        return (needToChange ? sb.toString() : s);
     }
 
 }

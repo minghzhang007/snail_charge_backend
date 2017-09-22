@@ -44,25 +44,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public PageList<BookVO> queryBooks(final BookQueryObject bookQueryObject) {
-        /*PageList<BookVO> itemsByPage = new AbstractPageTemplate<BookVO>() {
-            @Override
-            protected List<BookVO> queryItems() {
-                List<Book> books = bookMapper.queryBooks(bookQueryObject);
-                return BookServiceImpl.this.convert(mapping(books));
-            }
-
-            private Map<Long, Book> mapping(List<Book> books) {
-                if (CollectionUtils.isNotEmpty(books)) {
-                    Map<Long, Book> bookIdMapping = Maps.newHashMapWithExpectedSize(books.size());
-                    for (Book book : books) {
-                        bookIdMapping.put(book.getBookId(), book);
-                    }
-                    return bookIdMapping;
-                }
-                return Maps.newHashMapWithExpectedSize(0);
-            }
-        }.getItemsByPage(bookQueryObject);*/
-
         PageList<Book> itemsByPage1 = new AbstractPageTemplate<Book>() {
             @Override
             protected List<Book> queryItems() {
@@ -164,15 +145,15 @@ public class BookServiceImpl implements BookService {
             authorIdSet.addAll(authorIds);
             bookId2AuthorIdsMapping.put(entry.getKey(), authorIds);
         }
-
-        Map<Long, Author> authorIdMapping = authorMapper.queryAuthorsByIds(authorIdSet);
-        if (MapUtils.isNotEmpty(authorIdMapping)) {
-            Iterator<Map.Entry<Long, List<Long>>> it = bookId2AuthorIdsMapping.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<Long, List<Long>> bookId2AuthorIdsEntry = it.next();
-                bookId2AuthorNamesMap.put(bookId2AuthorIdsEntry.getKey(), getAuthorNames(bookId2AuthorIdsEntry.getValue(), authorIdMapping));
+        if(CollectionUtils.isNotEmpty(authorIdSet)){
+            Map<Long, Author> authorIdMapping = authorMapper.queryAuthorsByIds(authorIdSet);
+            if (MapUtils.isNotEmpty(authorIdMapping)) {
+                Iterator<Map.Entry<Long, List<Long>>> it = bookId2AuthorIdsMapping.entrySet().iterator();
+                while (it.hasNext()) {
+                    Map.Entry<Long, List<Long>> bookId2AuthorIdsEntry = it.next();
+                    bookId2AuthorNamesMap.put(bookId2AuthorIdsEntry.getKey(), getAuthorNames(bookId2AuthorIdsEntry.getValue(), authorIdMapping));
+                }
             }
-
         }
         return bookId2AuthorNamesMap;
     }

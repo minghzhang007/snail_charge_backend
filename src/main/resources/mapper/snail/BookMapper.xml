@@ -40,21 +40,6 @@
         BookId,Uuid,Title,Status,AuthorIds,AuthorAlias,ProviderId
     </sql>
 
-    <select id="queryBooksMap" resultMap="bookMap"
-            parameterType="com.netease.yuedu.snail.biz.model.queryObject.BookQueryObject">
-        SELECT 
-        <include refid="bookSimpleColumns"/>
-        FROM Book
-        <where>
-            <if test="uuid != null">
-                AND Uuid =#{uuid}
-            </if>
-            <if test="title != null">
-                AND Title = #{title}
-            </if>
-        </where>
-    </select>
-
     <select id="queryBooks" resultMap="bookMap"
             parameterType="com.netease.yuedu.snail.biz.model.queryObject.BookQueryObject">
         SELECT
